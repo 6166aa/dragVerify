@@ -1,0 +1,238 @@
+$successColor = #00b894;
+$successText = '验证通过';
+$successBlockIcon = './img/drag_validate_ok.png';
+$failColor = #d63031;
+$failText = '验证失败';
+$failBlockIcon = './img/drag_validate_error.png';
+$normalColor = #a6a5a0;
+$normalSliderBlockBackgroundColor = #fa9b19;
+$normalText = '点击完成验证';
+$normalBlockIcon = './img/drag_validate_arrow.png';
+$borderColor = #dcdfe6;
+
+vendor(prop, args) {
+  -webkit-{prop}: args;
+  -moz-{prop}: args;
+  -ms-{prop}: args;
+  -o-{prop}: args;
+  {prop}: args;
+}
+
+cursor() {
+  vendor(cursor, arguments);
+}
+
+user-select() {
+  vendor(user-select, arguments);
+}
+
+html {
+  height: 100%;
+}
+
+.drag-verify {
+  width: 300px;
+  height: 40px;
+  position: relative;
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.drag-verify__button {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  line-height: 40px;
+  color: #a6a5a0;
+  position: relative;
+  border: 1px solid $borderColor;
+
+  &::after {
+    content: $normalText;
+  }
+
+  .drag-verify__icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 16px;
+    display: inline-block;
+    background: url('./img/code2.png') no-repeat;
+    background-size: 100% 100%;
+  }
+}
+
+.drag-verify__button--success {
+  @extend .drag-verify__button;
+  color: $successColor;
+
+  .drag-verify__icon {
+    background: url('./img/code2_success.png') no-repeat;
+  }
+
+  &::after {
+    content: $successText;
+  }
+}
+
+.drag-verify__button--fail {
+  @extend .drag-verify__button;
+  color: $failColor;
+
+  .drag-verify__icon {
+    background: url('./img/code2_error.png') no-repeat;
+  }
+
+  &::after {
+    content: $failText;
+  }
+}
+
+.drag-verify__model-body {
+  z-index: 5;
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  border: 1px solid $borderColor;
+  border-radius: 2px;
+  padding: 10px;
+  user-select: none;
+
+  &&::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 23px;
+    left: -6px;
+    background-color: #ffff;
+    border-top: 1px solid $borderColor;
+    border-left: 1px solid $borderColor;
+    transform: rotate(-45deg);
+    z-index: 9;
+  }
+}
+
+.drag-verify__model {
+  z-index: 5;
+  position: absolute;
+  top: -9px;
+  left: 40px;
+  width: 100%;
+  display: none;
+}
+
+.drag-verify__model--show {
+  @extend .drag-verify__model;
+  display: block;
+}
+
+.drag-verify__img {
+  width: 100%;
+  position: relative;
+  height: 120px;
+  border: 1px solid #303133;
+  margin-top: 10px;
+}
+
+.drag-verify__img-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  background-size: 100% 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.drag-verify__img-background {
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+}
+
+.drag-verify__slider {
+  margin-top: 20px;
+  width: 100%;
+  height: 20px;
+  background-color: #eee;
+  position: relative;
+}
+
+.drag-verify__slider-block {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-top: -15px;
+  height: 30px;
+  width: 50px;
+  background-color: white;
+  border: 1px solid #ccc;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url($normalBlockIcon);
+    background-size: 100% 100%;
+  }
+}
+
+.drag-verify__slider-block--success {
+  @extend .drag-verify__slider-block;
+
+  &::after {
+    background-image: url($successBlockIcon);
+  }
+}
+
+.drag-verify__slider-block--fail {
+  @extend .drag-verify__slider-block;
+
+  &::after {
+    background-image: url($failBlockIcon);
+  }
+}
+
+.drag-verify__slider-background {
+  height: 100%;
+  background-color: $normalSliderBlockBackgroundColor;
+  width: 0;
+}
+
+.drag-verify__slider-background--success {
+  @extend .drag-verify__slider-background;
+  background-color: $successColor;
+}
+
+.drag-verify__slider-background--fail {
+  @extend .drag-verify__slider-background;
+  background-color: $failColor;
+}
+
+.drag-verify__footer {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.drag-verify__footer span {
+  cursor: pointer;
+
+  &:first-child {
+    margin-right: 15px;
+  }
+}

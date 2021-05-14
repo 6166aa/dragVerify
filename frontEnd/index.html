@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./lib/dragVerify.css">
+  <style>
+    html {
+      height: 100%;
+    }
+
+    #test {
+      border: 1px salmon solid;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="test">
+
+  </div>
+  <button class="submit-btn"> 登录</button>
+  <script src="./lib/dragVerify.js"></script>
+  <script src="./lib/axios.min.js"></script>
+  <script>
+    //需要
+    (async () => {
+      let fileBaseUrl = 'http://localhost:8999/file/';
+      dragVerify.init('#test', {
+        maxFailCount: 1,//最大错误次数后自动换拼图数据，默认值3
+        getVerifyInfo: (callback) => {
+          axios.get('http://localhost:8999/dragVerify').then(
+            ({ data }) => {
+              let res = {
+                block: fileBaseUrl + data.blockFileId,
+                background: fileBaseUrl + data.backgroundFileId,
+                y: data.y,
+                verifyId: data.dragVerifyId
+              };
+              callback(res);
+            }
+          );
+        },
+        verify: (x, verifyId, callback) => {
+          axios.get(`http://localhost:8999/dragVerify/${verifyId}?x=${x}`)
+            .then(({ data }) => callback(data));
+        }
+      });
+      document.querySelector('.submit-btn').addEventListener('click', () => {
+        if(dragVerify.isVerified()){
+          //isVerified()的作用是判断是否进行过验证码验证，至于验证是否通过，不需要关心
+          //提交登录
+          alert('提交登录中..');
+          //登录接口会对验证码再次验证
+          console.log(dragVerify.getOffsetX());
+        }else{
+          alert('请先验证验证码');
+        }
+      });
+    })()
+
+
+
+    // var x = dragVerify.getOffsetX();
+  </script>
+</body>
+
+</html>

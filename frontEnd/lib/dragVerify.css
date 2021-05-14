@@ -1,0 +1,197 @@
+html {
+  height: 100%;
+}
+.drag-verify {
+  width: 300px;
+  height: 40px;
+  position: relative;
+  box-sizing: border-box;
+}
+.drag-verify * {
+  box-sizing: border-box;
+}
+.drag-verify__button,
+.drag-verify__button--success,
+.drag-verify__button--fail {
+  width: 100%;
+  height: 100%;
+  -webkit-cursor: pointer;
+  -moz-cursor: pointer;
+  -ms-cursor: pointer;
+  -o-cursor: pointer;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  line-height: 40px;
+  color: #a6a5a0;
+  position: relative;
+  border: 1px solid #dcdfe6;
+}
+.drag-verify__button::after,
+.drag-verify__button--success::after,
+.drag-verify__button--fail::after {
+  content: '点击完成验证';
+}
+.drag-verify__button .drag-verify__icon,
+.drag-verify__button--success .drag-verify__icon,
+.drag-verify__button--fail .drag-verify__icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 16px;
+  display: inline-block;
+  background: url("./img/code2.png") no-repeat;
+  background-size: 100% 100%;
+}
+.drag-verify__button--success {
+  color: #00b894;
+}
+.drag-verify__button--success .drag-verify__icon {
+  background: url("./img/code2_success.png") no-repeat;
+}
+.drag-verify__button--success::after {
+  content: '验证通过';
+}
+.drag-verify__button--fail {
+  color: #d63031;
+}
+.drag-verify__button--fail .drag-verify__icon {
+  background: url("./img/code2_error.png") no-repeat;
+}
+.drag-verify__button--fail::after {
+  content: '验证失败';
+}
+.drag-verify__model-body {
+  z-index: 5;
+  position: absolute;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #dcdfe6;
+  border-radius: 2px;
+  padding: 10px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+.drag-verify__model-body.drag-verify__model-body::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 23px;
+  left: -6px;
+  background-color: #fff;
+  border-top: 1px solid #dcdfe6;
+  border-left: 1px solid #dcdfe6;
+  transform: rotate(-45deg);
+  z-index: 9;
+}
+.drag-verify__model,
+.drag-verify__model--show {
+  z-index: 5;
+  position: absolute;
+  top: -9px;
+  left: 40px;
+  width: 100%;
+  display: none;
+}
+.drag-verify__model--show {
+  display: block;
+}
+.drag-verify__img {
+  width: 100%;
+  position: relative;
+  height: 120px;
+  border: 1px solid #303133;
+  margin-top: 10px;
+}
+.drag-verify__img-block {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  background-size: 100% 100%;
+  background-color: rgba(255,255,255,0.3);
+}
+.drag-verify__img-background {
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+}
+.drag-verify__slider {
+  margin-top: 20px;
+  width: 100%;
+  height: 20px;
+  background-color: #eee;
+  position: relative;
+}
+.drag-verify__slider-block,
+.drag-verify__slider-block--success,
+.drag-verify__slider-block--fail {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-top: -15px;
+  height: 30px;
+  width: 50px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  -webkit-cursor: pointer;
+  -moz-cursor: pointer;
+  -ms-cursor: pointer;
+  -o-cursor: pointer;
+  cursor: pointer;
+}
+.drag-verify__slider-block::after,
+.drag-verify__slider-block--success::after,
+.drag-verify__slider-block--fail::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url("./img/drag_validate_arrow.png");
+  background-size: 100% 100%;
+}
+.drag-verify__slider-block--success::after {
+  background-image: url("./img/drag_validate_ok.png");
+}
+.drag-verify__slider-block--fail::after {
+  background-image: url("./img/drag_validate_error.png");
+}
+.drag-verify__slider-background,
+.drag-verify__slider-background--success,
+.drag-verify__slider-background--fail {
+  height: 100%;
+  background-color: #fa9b19;
+  width: 0;
+}
+.drag-verify__slider-background--success {
+  background-color: #00b894;
+}
+.drag-verify__slider-background--fail {
+  background-color: #d63031;
+}
+.drag-verify__footer {
+  text-align: right;
+  margin-top: 10px;
+}
+.drag-verify__footer span {
+  -webkit-cursor: pointer;
+  -moz-cursor: pointer;
+  -ms-cursor: pointer;
+  -o-cursor: pointer;
+  cursor: pointer;
+}
+.drag-verify__footer span:first-child {
+  margin-right: 15px;
+}
